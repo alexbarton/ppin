@@ -81,7 +81,7 @@ static struct parport_driver ppin_driver = {
 	PPIN_NAME,
 	ppin_attach,
 	ppin_detach,
-	NULL
+	{NULL}
 };
 
 static ssize_t
