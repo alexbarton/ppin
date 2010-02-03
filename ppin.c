@@ -47,6 +47,18 @@ MODULE_AUTHOR("Alexander Barton, alex@barton.de");
 MODULE_DESCRIPTION("Driver for controlling the state of parallel port PINs");
 MODULE_LICENSE("GPL");
 
+void
+set_pins(void)
+{
+	if (parport_claim_or_block(parport_pins) < 0) {
+		printk(KERN_ERR
+		       "Could not claim the " PPIN_DEV " parallel port device\n");
+		return;
+	}
+	parport_write_data(parport_pins->port, pin_state);
+	parport_release(parport_pins);
+}
+
 static void
 ppin_attach(struct parport *port)
 {
@@ -143,15 +155,7 @@ ppin_write(struct file *file, const char *buf, size_t count, loff_t * ppos)
 		return count;
 	}
 
-	if (parport_claim_or_block(parport_pins) < 0) {
-		printk(KERN_ERR
-		       "Could not claim the " PPIN_DEV " parallel port device\n");
-		return 0;
-	}
-
-	parport_write_data(parport_pins->port, pin_state);
-
-	parport_release(parport_pins);
+	set_pins();
 	return count;
 }
 
@@ -204,6 +208,8 @@ ppin_init(void)
 	}
 
 	printk(KERN_INFO "" PPIN_NAME " driver v%s loaded\n", PPIN_VERSION);
+
+	set_pins();
 	return 0;
 }
 
