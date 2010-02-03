@@ -1,0 +1,38 @@
+Parallel Port Pin driver for Linux 2.6: ppin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This kernel module will register the /dev/ppin (10, 151) device which
+controls up to eight pins through the first parallel port.
+
+Please note that documentation is mostly lacking at the moment.
+Use the source, luke!
+
+Controlling the pins is as easy as echo num state >/dev/ppin, where num
+is 0 to 7 and state is one of "on" or "off".
+For example "echo 3 on >/dev/ppin" switches the 3rd pin on.
+
+You can read the status of the pins with "cat /dev/ppin".
+
+License
+~~~~~~~
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
+
+Authors
+~~~~~~~
+
+Alexander Barton, alex@barton.de (for Linux 2.6, 2009)
+
+This work is heavily(!) based on the devled driver written by Konstantinos
+Natsakis, cyfex@mail.com, for Linux 2.2/2.4.
+
+Source Code
+~~~~~~~~~~~
+
+At the moment, there are no distribution archives available, the complete
+source code is stored in a GIT repository. You can access the repository
+using the web frontend or use the following command to clone it:
+"git clone git://arthur.barton.de/ppin.git"

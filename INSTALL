@@ -1,0 +1,12 @@
+Parallel Port Pin driver for Linux 2.6: ppin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Installation:
+
+$ make
+$ sudo make modules_install
+
+Usage:
+
+$ cat /dev/ppin
+$ echo [0-7] {on|off} >/dev/ppin
