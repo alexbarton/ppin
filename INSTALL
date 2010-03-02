@@ -10,3 +10,10 @@ Usage:
 
 $ cat /dev/ppin
 $ echo [0-7] {on|off} >/dev/ppin
+
+Udev:
+
+$ addgroup --system ppin
+
+# Add to "/etc/udev/rules.d/92-permissions-ppin.rules":
+KERNEL=="ppin*", MODE="0660", GROUP="ppin"
